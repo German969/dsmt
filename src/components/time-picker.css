@@ -1,0 +1,11 @@
+.time-picker--container {
+    margin: 50px;
+}
+
+.time-picker--input-number, .time-picker--input-time{
+    margin-right: 20px;
+}
+
+.time-picker--select {
+    margin-left: 20px;
+}

@@ -1,0 +1,26 @@
+.turns-picker-container .turns-picker-list-item {
+    justify-content: center;
+    text-align: center;
+    line-height: 40px;
+}
+
+.turns-picker-card .turns-picker-input {
+    content: none;
+    padding: 0 10px;
+}
+
+.turns-picker-list-item .turns-picker-card {
+    background-color: lightgray;
+}
+
+.turns-picker-card .turns-picker-input:before {
+    content: none;
+}
+
+.turns-picker-card .turns-picker-input:after {
+    content: none;
+}
+
+.turns-picker-input-number {
+    width: 50px;
+}
