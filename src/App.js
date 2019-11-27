@@ -81,7 +81,8 @@ function App() {
         } else {
             contentToRender = (
                 <CounterPage
-                    time={time}
+                    totalTime={time}
+                    turnsCount={turns.length}
                     backToSetup={()=>setCounter(false)}
                 />
             );

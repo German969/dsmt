@@ -1,0 +1,10 @@
+.turns-loader {
+    display: flex;
+    margin: 20px 20px;
+}
+
+.partial-progress {
+    margin: 0 2px;
+    height: 20px !important;
+    border-radius: 7px;
+}
