@@ -7,13 +7,25 @@ function CounterPage (props) {
     const [times, setTimes] = useState(getInitialTimes(props.totalTime, props.turnsCount));
     const [currentTurn, setCurrentTurn] = useState(0);
 
+    const nextTurn = () => {
+        setCurrentTurn(currentTurn + 1);
+    };
+
     return (
         <div>
             <Clock time={props.totalTime}/>
-            <TurnsLoader turns={times} totalTime={props.totalTime} />
             <Button
                 variant="contained"
                 color="primary"
+                className={'next-button'}
+                onClick={nextTurn}
+            >
+                Next
+            </Button>
+            <TurnsLoader turns={times} totalTime={props.totalTime} currentTurn={currentTurn} />
+            <Button
+                variant="contained"
+                color="secondary"
                 className={'back-button'}
                 onClick={props.backToSetup}
             >
