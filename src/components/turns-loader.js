@@ -3,28 +3,29 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import './turns-loader.css';
 
 function TurnsLoader (props) {
-    const [totalProgressValues, setTotalProgressValues] = useState(getInitialTotalProgressValues(props.turns, props.totalTime));
+    // tiempo avanzado del turno
     const [currentProgressValues, setCurrentProgressValues] = useState(getInitialCurrentProgressValues(props.turns));
+    // intervalo del contador actual
     const [currentInterval, setCurrentInterval] = useState(null);
 
     const [currentProgress, setCurrentProgress] = useState(0);
 
     const renderProgressValues = () => {
-        return totalProgressValues.map((progressValue, index) => {
+        return props.totalProgressValues.map((progressValue, index) => {
             return (
                 <div style={{width: progressValue + "%"}}>
                     <LinearProgress
                         className={'partial-progress'}
                         key={'progress'+index}
                         variant="determinate"
-                        value={currentProgressValues[index]}
+                        value={props.currentProgressValues[index]}
                     />
                 </div>
             );
         });
     };
 
-    useEffect(() => {
+    /*useEffect(() => {
         const newProgressValues = [...currentProgressValues];
 
         const interval = setInterval(() => {
@@ -36,26 +37,13 @@ function TurnsLoader (props) {
         if (currentInterval) clearInterval(currentInterval);
 
         setCurrentInterval(interval);
-    }, [props.currentTurn]);
+    }, [props.currentTurn]);*/
 
     return (
         <div className={'turns-loader'}>
             {renderProgressValues()}
         </div>
     );
-}
-
-function getInitialTotalProgressValues (turns, totalTime) {
-    const currentTimes = [];
-    let progress;
-
-    turns.forEach((turn) => {
-        progress = turn * 100 / totalTime;
-
-        currentTimes.push(progress);
-    });
-
-    return currentTimes;
 }
 
 function getInitialCurrentProgressValues (turns) {
