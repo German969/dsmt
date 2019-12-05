@@ -3,12 +3,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import './turns-loader.css';
 
 function TurnsLoader (props) {
-    // tiempo avanzado del turno
-    const [currentProgressValues, setCurrentProgressValues] = useState(getInitialCurrentProgressValues(props.turns));
-    // intervalo del contador actual
-    const [currentInterval, setCurrentInterval] = useState(null);
-
-    const [currentProgress, setCurrentProgress] = useState(0);
 
     const renderProgressValues = () => {
         return props.totalProgressValues.map((progressValue, index) => {

@@ -36,9 +36,10 @@ function CounterPage (props) {
 
     useEffect(() => {
         const newProgressValues = [...currentProgressValues];
+        const oneSecondPercentage = 100 / (props.totalTime / props.turnsCount);
 
         const interval = setInterval(() => {
-            newProgressValues[currentTurn] = newProgressValues[currentTurn] + 1;
+            newProgressValues[currentTurn] = newProgressValues[currentTurn] + oneSecondPercentage;
 
             setCurrentProgressValues([...newProgressValues]);
         }, 1000);
@@ -51,21 +52,32 @@ function CounterPage (props) {
     const updateTimes = () => {
         const newTimes = [];
         const timePassed = currentProgressValues.reduce((total, actual, index) => {
-            if (index <= currentTurn) {
-                return total + actual;
+            if (index === currentTurn) {
+                const timeForProgress = actual * (props.totalTime / props.turnsCount) / 100;
+
+                return total + timeForProgress;
+            } else if (index < currentTurn) {
+                const timeForProgress = totalProgressValues[index] * (props.totalTime / props.turnsCount) / 100;
+
+                return total + timeForProgress;
             } else {
                 return total;
             }
         }, 0);
+        console.log('time passed: ', timePassed);
         const newEqualTime = (props.totalTime - timePassed) / (props.turnsCount - (currentTurn + 1));
+        console.log('new equal time: ', newEqualTime);
         let newTotalProgressValues;
         let newCurrentProgressValues = [...currentProgressValues];
+
+        console.log('total progress values: ', totalProgressValues);
 
         for (let i = 0; i < (currentTurn + 1); i++) {
             let finishValue;
 
             if (i === currentTurn) {
-                finishValue = totalProgressValues[i] / 1000 * props.totalTime;
+                //finishValue = totalProgressValues[i] / 1000 * props.totalTime;
+                finishValue = currentProgressValues[i] * (props.totalTime / props.turnsCount) / 100;
             } else {
                 finishValue = times[i];
             }
@@ -77,12 +89,13 @@ function CounterPage (props) {
             newTimes.push(newEqualTime);
         }
 
+        console.log('new times: ', newTimes);
+
         newTotalProgressValues = getTotalProgressValues(newTimes, props.totalTime);
 
-        newCurrentProgressValues[currentTurn] = 100;
+        console.log('new total progress values: ', newTotalProgressValues);
 
-        console.log(newCurrentProgressValues);
-        console.log(newTotalProgressValues);
+        newCurrentProgressValues[currentTurn] = 100;
 
         setTimes(newTimes);
         setTotalProgressValues(newTotalProgressValues);
