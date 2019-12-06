@@ -36,12 +36,30 @@ function CounterPage (props) {
 
     useEffect(() => {
         const newProgressValues = [...currentProgressValues];
+        let newTimes = [...times];
         const oneSecondPercentage = 100 / (props.totalTime / props.turnsCount);
 
         const interval = setInterval(() => {
             newProgressValues[currentTurn] = newProgressValues[currentTurn] + oneSecondPercentage;
 
-            setCurrentProgressValues([...newProgressValues]);
+            if (newProgressValues[currentTurn] > 100) {
+                const equalDiscount = 1 / (props.turnsCount - currentTurn - 1);
+
+                newTimes = newTimes.map((time, index) => {
+                    if (index === currentTurn) {
+                        return time + 1;
+                    } else if (index > currentTurn) {
+                        return time - equalDiscount;
+                    } else {
+                        return time;
+                    }
+                });
+
+                setTimes(newTimes);
+                setTotalProgressValues(getTotalProgressValues(newTimes));
+            } else {
+                setCurrentProgressValues([...newProgressValues]);
+            }
         }, 1000);
 
         if (currentInterval) clearInterval(currentInterval);
