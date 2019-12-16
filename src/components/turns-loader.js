@@ -7,10 +7,6 @@ function TurnsLoader (props) {
     const renderProgressValues = () => {
         return props.totalProgressValues.map((progressValue, index) => {
 
-            if (index === 0) {
-                console.log(progressValue, props.currentProgressValues[index]);
-            }
-
             return (
                 <div style={{width: progressValue + "%"}}>
                     <LinearProgress
