@@ -19,8 +19,8 @@ function Clock (props) {
     };
 
     const startClock = () => {
-        let sec = seconds;
-        let min = minutes;
+        let sec = getInitialSeconds();
+        let min = getInitialMinutes();
 
         const interval = setInterval(() => {
             if (sec > 0) {
@@ -53,7 +53,7 @@ function Clock (props) {
     useEffect(() => {
         restartClock();
         startClock();
-    }, [props.currentTurn]);
+    }, [props.currentTurn, props.turnFinished]);
 
     return (
         <div>

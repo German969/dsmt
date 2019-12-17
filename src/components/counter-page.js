@@ -159,7 +159,7 @@ function CounterPage (props) {
 
     return (
         <div>
-            <Clock time={props.totalTime}/>
+            {/*<Clock time={props.totalTime}/>*/}
             <TurnProgress
                 progress={getCurrentProgress()}
                 turnTime={getCurrentTotalTime()}

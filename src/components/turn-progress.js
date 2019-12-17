@@ -8,9 +8,15 @@ function TurnProgress (props) {
     const extraPassedTime = props.turnTime - props.maxTime;
     const valueToTotalTime = extraPassedTime * 100 / timeToTotal;
 
-    const value = props.progress === 100 ? valueToTotalTime : props.progress;
+    const turnFinished = (props.progress === 100);
 
-    //const time = props.progress === 100 ? timeToTotal : props.turnTime;
+    const value = turnFinished ? valueToTotalTime : props.progress;
+
+    const time = turnFinished ? timeToTotal : props.turnTime;
+
+
+
+    const color = turnFinished ? 'secondary' : 'primary';
 
     return (
         <div className={'turn-progress'}>
@@ -19,9 +25,14 @@ function TurnProgress (props) {
                 variant="static"
                 value={value}
                 size={200}
+                color={color}
             />
             <div className={'turn-progress-clock'}>
-                <Clock time={props.turnTime} currentTurn={props.currentTurn} />
+                <Clock
+                    time={time}
+                    currentTurn={props.currentTurn}
+                    turnFinished={turnFinished}
+                />
             </div>
         </div>
     );
