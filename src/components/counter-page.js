@@ -166,6 +166,7 @@ function CounterPage (props) {
                 totalTime={props.totalTime}
                 pastTime={getPastTime()}
                 maxTime={initialCurrentTotalTime}
+                currentTurn={currentTurn}
             />
             <Button
                 variant="contained"

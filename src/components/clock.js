@@ -5,17 +5,20 @@ function Clock (props) {
         return Math.floor(props.time/60);
     };
     const getInitialSeconds = () => {
-        return props.time - getInitialMinutes() * 60;
+        return Math.floor(props.time - getInitialMinutes() * 60);
     };
 
     const [minutes, setMinutes] = useState(getInitialMinutes());
     const [seconds, setSeconds] = useState(getInitialSeconds());
 
+    // intervalo del contador actual
+    const [currentInterval, setCurrentInterval] = useState(null);
+
     const getActualSeconds = () => {
         return seconds + minutes * 60;
     };
 
-    useEffect(() => {
+    const startClock = () => {
         let sec = seconds;
         let min = minutes;
 
@@ -37,8 +40,20 @@ function Clock (props) {
             }
         }, 1000);
 
-        return () => clearInterval(interval);
-    }, []);
+        if (currentInterval) clearInterval(currentInterval);
+
+        setCurrentInterval(interval);
+    };
+
+    const restartClock = () => {
+        setMinutes(getInitialMinutes());
+        setSeconds(getInitialSeconds());
+    };
+
+    useEffect(() => {
+        restartClock();
+        startClock();
+    }, [props.currentTurn]);
 
     return (
         <div>

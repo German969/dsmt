@@ -10,6 +10,8 @@ function TurnProgress (props) {
 
     const value = props.progress === 100 ? valueToTotalTime : props.progress;
 
+    //const time = props.progress === 100 ? timeToTotal : props.turnTime;
+
     return (
         <div className={'turn-progress'}>
             <CircularProgress
@@ -19,7 +21,7 @@ function TurnProgress (props) {
                 size={200}
             />
             <div className={'turn-progress-clock'}>
-                <Clock time={props.turnTime}/>
+                <Clock time={props.turnTime} currentTurn={props.currentTurn} />
             </div>
         </div>
     );
