@@ -54,6 +54,9 @@ function CounterPage (props) {
     // tiempo avanzado de cada turno
     const [currentProgressValues, setCurrentProgressValues] = useState(getInitialCurrentProgressValues());
 
+    // tiempo maximo inicial del turno
+    const [initialCurrentTotalTime, setInitialCurrentTotalTime] = useState(totalTimes[currentTurn]);
+
     // intervalo del contador actual
     const [currentInterval, setCurrentInterval] = useState(null);
 
@@ -123,8 +126,10 @@ function CounterPage (props) {
             setCurrentProgressValues(newCurrentProgressValues);
             setTotalTimes(newTotalTimes);
             setTurnsPercentage(getTurnsPercentage(newTotalTimes));
+            setInitialCurrentTotalTime(newTotalTimes[currentTurn + 1]);
         } else {
             setCurrentProgressValues(newCurrentProgressValues);
+            setInitialCurrentTotalTime(totalTimes[currentTurn + 1]);
         }
     };
 
@@ -142,10 +147,26 @@ function CounterPage (props) {
         return totalTimes[currentTurn];
     };
 
+    const getPastTime = () => {
+        return totalTimes.reduce((total, actual, index) => {
+            if (index < currentTurn) {
+                return total + actual;
+            } else {
+                return total;
+            }
+        }, 0);
+    };
+
     return (
         <div>
             <Clock time={props.totalTime}/>
-            <TurnProgress progress={getCurrentProgress()} turnTime={getCurrentTotalTime()} />
+            <TurnProgress
+                progress={getCurrentProgress()}
+                turnTime={getCurrentTotalTime()}
+                totalTime={props.totalTime}
+                pastTime={getPastTime()}
+                maxTime={initialCurrentTotalTime}
+            />
             <Button
                 variant="contained"
                 color="primary"

@@ -6,6 +6,11 @@ function TurnsLoader (props) {
 
     const renderProgressValues = () => {
         return props.totalProgressValues.map((progressValue, index) => {
+            const color = (
+                (props.currentTurn === index) &&
+                (props.currentProgressValues[index] === 100)) ?
+                'secondary' :
+                'primary';
 
             return (
                 <div style={{width: progressValue + "%"}}>
@@ -14,6 +19,7 @@ function TurnsLoader (props) {
                         key={'progress'+index}
                         variant="determinate"
                         value={props.currentProgressValues[index]}
+                        color={color}
                     />
                 </div>
             );
