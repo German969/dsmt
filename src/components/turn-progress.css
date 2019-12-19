@@ -1,15 +1,12 @@
 .turn-progress {
-    position: relative;
     margin-bottom: 10px;
     margin-top: 20px;
 }
 
 .turn-progress-bar {
-    position: relative;
 }
 
 .turn-progress-clock {
-    position: absolute;
-    top: 60px;
-    left: 610px;
+    position: relative;
+    bottom: 140px;
 }
