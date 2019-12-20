@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from "react";
 import Clock from "./clock";
-import { Button } from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import TurnsLoader from "./turns-loader";
 import TurnProgress from "./turn-progress";
+import TurnsDrawer from './turns-drawer';
+import TurnsLeft from './turns-left';
 import moment from 'moment';
+import './counter-page.css';
 
-function CounterPage (props) {
+function CounterPage(props) {
 
     const getInitialTotalTimes = () => {
         let newTimes = [];
@@ -73,6 +76,7 @@ function CounterPage (props) {
 
             if (newCurrentProgressValues[currentTurn] >= 100) {
                 const equalDiscount = 1 / (props.turnsCount - currentTurn - 1);
+                let timePassed;
 
                 newCurrentProgressValues[currentTurn] = 100;
 
@@ -86,8 +90,17 @@ function CounterPage (props) {
                     }
                 });
 
-                setTotalTimes(newTotalTimes);
-                setTurnsPercentage(getTurnsPercentage(newTotalTimes));
+                timePassed = newCurrentProgressValues.reduce((total, actual, index) => {
+                    return total + (newTotalTimes[index] * (actual / 100));
+                }, 0);
+
+                if (timePassed >= props.totalTime) {
+                    props.setLastTurn(currentTurn);
+                    props.setTimeFinished();
+                } else {
+                    setTotalTimes(newTotalTimes);
+                    setTurnsPercentage(getTurnsPercentage(newTotalTimes));
+                }
             }
 
             setCurrentProgressValues([...newCurrentProgressValues]);
@@ -137,6 +150,10 @@ function CounterPage (props) {
         updateTimes();
 
         setCurrentTurn(currentTurn + 1);
+
+        if (currentTurn + 1 === props.turnsCount) {
+            props.setTimeFinished();
+        }
     };
 
     const getCurrentProgress = () => {
@@ -160,6 +177,7 @@ function CounterPage (props) {
     return (
         <div>
             {/*<Clock time={props.totalTime}/>*/}
+            <TurnsLeft currentTurn={currentTurn} turnsCount={props.turnsCount}/>
             <TurnProgress
                 progress={getCurrentProgress()}
                 turnTime={getCurrentTotalTime()}
@@ -168,6 +186,7 @@ function CounterPage (props) {
                 maxTime={initialCurrentTotalTime}
                 currentTurn={currentTurn}
             />
+            <TurnsDrawer currentTurn={currentTurn} turns={props.turns}/>
             <Button
                 variant="contained"
                 color="primary"

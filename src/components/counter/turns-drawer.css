@@ -1,0 +1,25 @@
+.turns-drawer-container {
+    display: inline-block;
+    position: absolute;
+    right: 120px;
+    top: 50px;
+}
+
+.turns-drawer-list-item {
+    justify-content: center;
+    text-align: center;
+    line-height: 40px;
+}
+
+.turns-drawer-container .turns-drawer-list-item:first-of-type .turns-drawer-card {
+    background-color: cadetblue;
+    margin-bottom: 15px;
+}
+
+.turns-drawer-list-item .turns-drawer-card {
+    background-color: lightgray;
+    padding: 0 10px;
+    min-height: 40px;
+    min-width: 100px;
+    text-align: center;
+}

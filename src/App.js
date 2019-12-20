@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import './App.css';
 import moment from 'moment';
-import CounterPage from './components/counter-page';
-import SetUpPage from "./components/set-up-page";
+import CounterPage from './components/counter/counter-page';
+import SetUpPage from "./components/set-up/set-up-page";
+import FinishPage from "./components/finish/finish-page";
 
 function App() {
     const [timeType, setTimeType] = useState('minutes');
@@ -10,6 +11,8 @@ function App() {
     const [hour, setHour] = useState(null);
     const [counter, setCounter] = useState(false);
     const [turns, setTurns] = useState(['']);
+    const [timeFinished, setTimeFinished] = useState(false);
+    const [lastTurn, setLastTurn] = useState(0);
 
     const handleNewTime = (newHour) => {
         setHour(newHour);
@@ -78,13 +81,20 @@ function App() {
                     addMany={addMany}
                 />
             );
-        } else {
+        } else if (!timeFinished) {
             contentToRender = (
                 <CounterPage
                     totalTime={time}
                     turnsCount={turns.length}
                     backToSetup={()=>setCounter(false)}
+                    turns={turns}
+                    setTimeFinished={() => {setTimeFinished(true)}}
+                    setLastTurn={(last) => {setLastTurn(last)}}
                 />
+            );
+        } else {
+            contentToRender = (
+                <FinishPage turns={turns} lastTurn={lastTurn} />
             );
         }
 

@@ -1,0 +1,22 @@
+.finish-page-title {
+    margin-top: 50px;
+}
+
+.turns-not-taken-container {
+    margin: auto;
+}
+
+.finish-page-list-item {
+    justify-content: center;
+    text-align: center;
+    line-height: 40px;
+}
+
+.finish-page-list-item .finish-page-card {
+    background-color: lightgray;
+    padding: 0 10px;
+    min-height: 40px;
+    min-width: 100px;
+    text-align: center;
+    margin: auto;
+}
