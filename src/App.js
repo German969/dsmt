@@ -4,6 +4,7 @@ import moment from 'moment';
 import CounterPage from './components/counter/counter-page';
 import SetUpPage from "./components/set-up/set-up-page";
 import FinishPage from "./components/finish/finish-page";
+import AppFooter from "./components/app-footer";
 
 function App() {
     const [timeType, setTimeType] = useState('minutes');
@@ -104,6 +105,7 @@ function App() {
     return (
         <div className="App">
             {renderPage()}
+            <AppFooter />
         </div>
     );
 }
