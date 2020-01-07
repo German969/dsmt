@@ -1,31 +1,72 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Don't Steal My Time - User Guide
+## Available Scripts
 
-This application is intended to help with time organization in any kind of meeting that can be splitted into different 'turns'.
+In the project directory, you can run:
 
-### The setup
+### `yarn start`
 
-The first thing you need to do is define your meeting time in minutes.
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-[set up duration in minutes](https://github.com/German969/dsmt/tree/master/public/images/user-guide/set-up-duration-minutes.png)
+The page will reload if you make edits.<br />
 
-Alternatively, you can define an ending time (in local hour) for the meeting, and DSMT app will calculate the remaining minutes when you press start.
+You will also see any lint errors in the console.
 
-[set up duration in time](https://github.com/German969/dsmt/tree/master/public/images/user-guide/set-up-duration-time.png)
+### `yarn test`
 
-The second step is define the amount of time slots you want your time to be divided in.
+Launches the test runner in the interactive watch mode.<br />
 
-You can easily add the right amount of turns by entering the number and pressing accept:
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-[set up turns amount](https://github.com/German969/dsmt/tree/master/public/images/user-guide/set-up-total-turns.png)
+### `yarn build`
 
-Or you can add them one by one with the `add` button at the bottom.
+Builds the app for production to the `build` folder.<br />
 
-Each turn is represented by a card, it starts empty, but you can fill it with a representative label for that specific turn:
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-[set up turn card](https://github.com/German969/dsmt/tree/master/public/images/user-guide/set-up-turn-card.png)
+The build is minified and the filenames include the hashes.<br />
 
-Now you have all you need to start your meeting, just press `start`
+Your app is ready to be deployed!
 
-### The counterclock
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `yarn build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

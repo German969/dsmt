@@ -17,7 +17,7 @@ function TurnsDrawer (props) {
 
     return (
         <div className={'turns-drawer-container'}>
-            <h2>Actual and Next Turns</h2>
+            <h2>Current and Next Turns</h2>
             {renderNextTurns()}
         </div>
     );
