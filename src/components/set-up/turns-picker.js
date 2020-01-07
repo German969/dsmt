@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {List, ListItem, Button, Input, Card} from '@material-ui/core';
+import {List, ListItem, Button, Input, TextField, Card} from '@material-ui/core';
 import './turns-picker.css';
 
 function TurnsPicker (props) {
@@ -27,13 +27,22 @@ function TurnsPicker (props) {
     return (
         <div className={'turns-picker-container'}>
             <h1>Turns</h1>
-            <Input
+            <TextField
                 type={'number'}
                 value={addManyTurns}
                 onChange={(e)=>{setAddManyTurns(e.target.value)}}
                 className={'turns-picker-input-number'}
+                label={'Add many'}
+                InputLabelProps={{
+                    shrink: true,
+                }}
             />
-            <Button onClick={()=>{props.addMany(addManyTurns)}}>Accept</Button>
+            <Button
+                onClick={()=>{props.addMany(addManyTurns)}}
+                className={'turns-picker-accept-button'}
+            >
+                Accept
+            </Button>
             <List>
                 {renderListItems()}
                 <Button onClick={() => props.addTurn()}>Add</Button>

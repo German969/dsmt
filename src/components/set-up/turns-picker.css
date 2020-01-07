@@ -22,5 +22,10 @@
 }
 
 .turns-picker-input-number {
-    width: 50px;
+    width: 80px;
+}
+
+.turns-picker-accept-button {
+    margin-top: 10px !important;
+    margin-left: 10px !important;
 }

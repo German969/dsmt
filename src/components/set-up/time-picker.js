@@ -23,11 +23,15 @@ function TimePicker (props) {
 
         if (isMinutesPicker()) {
             contentToRender =
-                <Input
+                <TextField
+                    label={'Duration'}
                     type={'number'}
                     className={'time-picker--input-number'}
                     placeholder={'Minutes'}
                     onChange={(e)=>{props.onTimeChange(e.target.value)}}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                 />
         } else if (isTimePicker()) {
             contentToRender =
@@ -35,7 +39,12 @@ function TimePicker (props) {
                     type={'time'}
                     className={'time-picker--input-time'}
                     onChange={handleTimeChange}
+                    label={'Ending time'}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                 />
+
         }
 
         return contentToRender
