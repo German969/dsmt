@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Clock from "./clock";
+import OverallClock from "./overall-clock";
 import {Button} from "@material-ui/core";
 import TurnsLoader from "./turns-loader";
 import TurnProgress from "./turn-progress";
@@ -178,6 +178,7 @@ function CounterPage(props) {
         <div>
             {/*<Clock time={props.totalTime}/>*/}
             <TurnsLeft currentTurn={currentTurn} turnsCount={props.turnsCount}/>
+            <OverallClock time={props.totalTime}/>
             <TurnProgress
                 progress={getCurrentProgress()}
                 turnTime={getCurrentTotalTime()}

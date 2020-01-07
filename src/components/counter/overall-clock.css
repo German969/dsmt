@@ -1,0 +1,6 @@
+.overall-clock {
+    display: inline-block;
+    position: absolute;
+    left: 120px;
+    top: 200px;
+}

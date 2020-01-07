@@ -1,7 +1,7 @@
 .turns-drawer-container {
     display: inline-block;
     position: absolute;
-    right: 120px;
+    right: 50px;
     top: 50px;
 }
 
@@ -18,8 +18,10 @@
 
 .turns-drawer-list-item .turns-drawer-card {
     background-color: lightgray;
-    padding: 0 10px;
-    min-height: 40px;
-    min-width: 100px;
+    padding: 2px 14px;
+    min-height: 50px;
+    min-width: 150px;
     text-align: center;
+    font-size: 24px;
+    line-height: 50px;
 }

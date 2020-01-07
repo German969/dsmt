@@ -20,6 +20,7 @@ function TurnProgress (props) {
 
     return (
         <div className={'turn-progress'}>
+            <h2>Current Turn Time</h2>
             <CircularProgress
                 className={'turn-progress-bar'}
                 variant="static"
