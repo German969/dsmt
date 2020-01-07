@@ -24,7 +24,7 @@ function TurnProgress (props) {
             <CircularProgress
                 className={'turn-progress-bar'}
                 variant="static"
-                value={value}
+                value={100 - value}
                 size={200}
                 color={color}
             />
