@@ -21,7 +21,13 @@ function App() {
 
     const startRound = () => {
         if (timeType === 'time') {
-            setTime(hour.diff(moment(), 'seconds'));
+            let remainingSeconds = hour.diff(moment(), 'seconds');
+
+            if (remainingSeconds <= 0) {
+                remainingSeconds = 60 * 60;
+            }
+
+            setTime(remainingSeconds);
         }
 
         setCounter(true);
