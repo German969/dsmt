@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
-import OverallClock from "./overall-clock";
-import {Button} from "@material-ui/core";
-import TurnsLoader from "./turns-loader";
-import TurnProgress from "./turn-progress";
+import React, {useEffect, useState} from 'react';
+import moment from 'moment';
+import {Button} from '@material-ui/core';
+import OverallClock from './overall-clock';
+import TurnProgress from './turn-progress';
 import TurnsDrawer from './turns-drawer';
 import TurnsLeft from './turns-left';
-import moment from 'moment';
+import TurnsLoader from './turns-loader';
 import './counter-page.css';
 
 function CounterPage(props) {
@@ -44,23 +44,23 @@ function CounterPage(props) {
         return currentTimes;
     };
 
-    // Tiempo total de cada turno
+    // Total time of each turn
     const [totalTimes, setTotalTimes] = useState(getInitialTotalTimes());
 
-    // turno actual
+    // Current turn
     const [currentTurn, setCurrentTurn] = useState(0);
 
-    // Porcentaje de cada turno en base al total
+    // Percentage of each turn based on total
     const [turnsPercentage, setTurnsPercentage] =
         useState(getTurnsPercentage(totalTimes));
 
     // tiempo avanzado de cada turno
     const [currentProgressValues, setCurrentProgressValues] = useState(getInitialCurrentProgressValues());
 
-    // tiempo maximo inicial del turno
+    // maximum initial turn time
     const [initialCurrentTotalTime, setInitialCurrentTotalTime] = useState(totalTimes[currentTurn]);
 
-    // intervalo del contador actual
+    // current counter interval
     const [currentInterval, setCurrentInterval] = useState(null);
 
     const [initialTurnMoment, setInitialTurnMoment] = useState(null);
@@ -174,43 +174,56 @@ function CounterPage(props) {
         }, 0);
     };
 
+    const getTurnProgressProps = () => {
+        return {
+            currentTurn: currentTurn,
+            maxTime: initialCurrentTotalTime,
+            pastTime: getPastTime(),
+            progress: getCurrentProgress(),
+            totalTime: props.totalTime,
+            turnTime: getCurrentTotalTime()
+        }
+    };
+
+    const getNextButtonProps = () => {
+        return {
+            children: 'Next',
+            className: 'next-button',
+            color: 'primary',
+            onClick: nextTurn,
+            variant: 'contained'
+        };
+    };
+
+    const getTurnsLoaderProps = () => {
+        return {
+            currentProgressValues: currentProgressValues,
+            currentTurn: currentTurn,
+            totalProgressValues: turnsPercentage,
+            totalTime: props.totalTime,
+            turns: totalTimes
+        };
+    };
+
+    const getBackButtonProps = () => {
+        return {
+            children: 'Back',
+            className: 'back-button',
+            color: 'secondary',
+            onClick: props.backToSetup,
+            variant: 'contained'
+        }
+    };
+
     return (
         <div>
-            {/*<Clock time={props.totalTime}/>*/}
             <TurnsLeft currentTurn={currentTurn} turnsCount={props.turnsCount}/>
             <OverallClock time={props.totalTime}/>
-            <TurnProgress
-                progress={getCurrentProgress()}
-                turnTime={getCurrentTotalTime()}
-                totalTime={props.totalTime}
-                pastTime={getPastTime()}
-                maxTime={initialCurrentTotalTime}
-                currentTurn={currentTurn}
-            />
+            <TurnProgress {...getTurnProgressProps()} />
             <TurnsDrawer currentTurn={currentTurn} turns={props.turns}/>
-            <Button
-                variant="contained"
-                color="primary"
-                className={'next-button'}
-                onClick={nextTurn}
-            >
-                Next
-            </Button>
-            <TurnsLoader
-                turns={totalTimes}
-                totalTime={props.totalTime}
-                currentTurn={currentTurn}
-                totalProgressValues={turnsPercentage}
-                currentProgressValues={currentProgressValues}
-            />
-            <Button
-                variant="contained"
-                color="secondary"
-                className={'back-button'}
-                onClick={props.backToSetup}
-            >
-                Back
-            </Button>
+            <Button {...getNextButtonProps()} />
+            <TurnsLoader {...getTurnsLoaderProps()} />
+            <Button {...getBackButtonProps()} />
         </div>
     );
 }
