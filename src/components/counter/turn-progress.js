@@ -4,12 +4,10 @@ import Clock from "./clock";
 import './turn-progress.css';
 
 function TurnProgress (props) {
-    const timeToTotal = props.totalTime - (props.pastTime + props.maxTime);
-    const extraPassedTime = props.turnTime - props.maxTime;
-    const valueToTotalTime = extraPassedTime * 100 / timeToTotal;
+    const valueFromBeginning = (props.pastTime + props.turnTime) * 100 / props.totalTime;
     const turnFinished = (props.progress === 100);
-    const value = turnFinished ? valueToTotalTime : props.progress;
-    const time = turnFinished ? 0 : props.turnTime; // change to exeeded time
+    const value = turnFinished ? valueFromBeginning : 100 - props.progress;
+    const time = turnFinished ? 0 : props.turnTime;
     const color = turnFinished ? 'secondary' : 'primary';
     const direction = turnFinished ? 'forward' : 'backward';
 
@@ -17,7 +15,7 @@ function TurnProgress (props) {
         return {
             className: 'turn-progress-bar',
             variant: 'static',
-            value: 100 - value,
+            value: value,
             size: 200,
             color: color
         }
@@ -25,7 +23,7 @@ function TurnProgress (props) {
 
     const getClockProps = () => {
         return {
-            time: time, // exceeded when finish
+            time: time,
             currentTurn: props.currentTurn,
             turnFinished: turnFinished,
             direction: direction,
