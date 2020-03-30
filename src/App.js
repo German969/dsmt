@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import './App.css';
 import moment from 'moment';
-import CounterPage from './components/counter/counter-page';
-import SetUpPage from "./components/set-up/set-up-page";
-import FinishPage from "./components/finish/finish-page";
 import AppFooter from "./components/app-footer";
+import CounterPage from './components/counter/counter-page';
+import FinishPage from "./components/finish/finish-page";
+import SetUpPage from "./components/set-up/set-up-page";
+import './App.css';
 
 function App() {
     const [timeType, setTimeType] = useState('minutes');
@@ -71,33 +71,41 @@ function App() {
         setTurns(newTurns);
     };
 
+    const getSetUpPageProps = () => {
+        return {
+            setTime: setTime,
+            setTimeType: setTimeType,
+            turns: turns,
+            addMany: addMany,
+            addTurn: addTurn,
+            handleNewTime: handleNewTime,
+            removeItem: removeItem,
+            setNewTurn: setNewTurn,
+            startRound: startRound
+        }
+    };
+
+    const getCounterPageProps = () => {
+        return {
+            totalTime: time,
+            turnsCount: turns.length,
+            backToSetup: () => setCounter(false),
+            turns: turns,
+            setTimeFinished: () => setTimeFinished(true),
+            setLastTurn: (last) => setLastTurn(last)
+        };
+    };
+
     const renderPage = () => {
-        let contentToRender = null;
+        let contentToRender;
 
         if (!counter) {
             contentToRender = (
-                <SetUpPage
-                    setTime={setTime}
-                    handleNewTime={handleNewTime}
-                    setTimeType={setTimeType}
-                    startRound={startRound}
-                    setNewTurn={setNewTurn}
-                    addTurn={addTurn}
-                    removeItem={removeItem}
-                    turns={turns}
-                    addMany={addMany}
-                />
+                <SetUpPage {...getSetUpPageProps()} />
             );
         } else if (!timeFinished) {
             contentToRender = (
-                <CounterPage
-                    totalTime={time}
-                    turnsCount={turns.length}
-                    backToSetup={()=>setCounter(false)}
-                    turns={turns}
-                    setTimeFinished={() => {setTimeFinished(true)}}
-                    setLastTurn={(last) => {setLastTurn(last)}}
-                />
+                <CounterPage {...getCounterPageProps()} />
             );
         } else {
             contentToRender = (
