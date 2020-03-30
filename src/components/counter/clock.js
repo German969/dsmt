@@ -14,11 +14,7 @@ function Clock (props) {
     // intervalo del contador actual
     const [currentInterval, setCurrentInterval] = useState(null);
 
-    const getActualSeconds = () => {
-        return seconds + minutes * 60;
-    };
-
-    const startClock = () => {
+    const counterClock = () => {
         let sec = getInitialSeconds();
         let min = getInitialMinutes();
 
@@ -45,6 +41,34 @@ function Clock (props) {
         setCurrentInterval(interval);
     };
 
+    const forwardClock = () => {
+        let sec = getInitialSeconds();
+        let min = getInitialMinutes();
+        let maxMinutes = props.totalTime / 60;
+
+        const interval = setInterval(() => {
+            if (sec < 60) {
+                setSeconds(s => s + 1 );
+                sec = sec + 1;
+            }
+
+            if (sec === 0) {
+                if (min === maxMinutes) {
+                    clearInterval(interval)
+                } else {
+                    setMinutes(m => m + 1);
+                    setSeconds(0);
+                    min = min - 1;
+                    sec = 0;
+                }
+            }
+        }, 1000);
+
+        if (currentInterval) clearInterval(currentInterval);
+
+        setCurrentInterval(interval);
+    };
+
     const restartClock = () => {
         setMinutes(getInitialMinutes());
         setSeconds(getInitialSeconds());
@@ -52,7 +76,12 @@ function Clock (props) {
 
     useEffect(() => {
         restartClock();
-        startClock();
+
+        if (props.direction === 'backward') {
+            counterClock();
+        } else {
+            forwardClock()
+        }
     }, [props.currentTurn, props.turnFinished]);
 
     return (

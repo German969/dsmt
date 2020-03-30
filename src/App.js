@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import moment from 'moment';
-import AppFooter from "./components/app-footer";
+import AppFooter from './components/app-footer';
 import CounterPage from './components/counter/counter-page';
-import FinishPage from "./components/finish/finish-page";
-import SetUpPage from "./components/set-up/set-up-page";
+import FinishPage from './components/finish/finish-page';
+import SetUpPage from './components/set-up/set-up-page';
 import './App.css';
 
 function App() {
